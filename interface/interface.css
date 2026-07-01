@@ -12,6 +12,16 @@ QPushButton {
     font-size: 18px;
 } */
 
+QLabel#title {
+    font-size: 30px;
+    font: "Arial";
+}
+
+QLabel {
+    font-size: 20px;
+    font: "Arial";
+}
+
 QMainWindow {
     background-color: #ffc9f3;
 }
