@@ -1,0 +1,17 @@
+/* QLabel {
+    background-color: red;
+}
+
+QLabel#title {
+    font-size: 20px;
+}
+
+QPushButton {
+    background-color: #2ABf9E;
+    padding: 20px;
+    font-size: 18px;
+} */
+
+QMainWindow {
+    background-color: #ffc9f3;
+}
