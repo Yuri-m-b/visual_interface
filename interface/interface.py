@@ -2,6 +2,7 @@
 
 import sys
 import random
+import time
 from PySide6.QtWidgets import (
     QApplication,
     QLabel,
@@ -11,7 +12,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from PySide6.QtCore import QSize, Slot, Qt
+from PySide6.QtCore import QSize, QTimer, Slot, Qt
 from PySide6.QtGui import QIcon, QPixmap
 
 FIGURE_MAPPING = {
@@ -19,6 +20,8 @@ FIGURE_MAPPING = {
     "figure2": "images/cats_2.png",
     "figure3": "images/i_love_you.png",
     "figure4": "images/cats_3.png",
+    "figure5": "images/dis_for_you.png",
+    "figure6": "images/cats_4.png",
 }
 
 
@@ -52,7 +55,7 @@ class FirstPage(QWidget):
         button = QPushButton("Te amooooo!!", self)
         button.resize(300, 100)
         button.move(450, 250)
-        button.clicked.connect(lambda: self.stack.setCurrentIndex(1))
+        button.clicked.connect(lambda: self.stack.setCurrentIndex(4))
 
 
 class SecondPage(QWidget):
@@ -173,10 +176,123 @@ class FourthPage(QWidget):
     def init_ui(self):
         """Set up the UI for the fourth page."""
         layout = QVBoxLayout(self)
-        pixmap = QPixmap(FIGURE_MAPPING["figure4"])
+        pixmap = QPixmap(FIGURE_MAPPING["figure5"])
         figure_label = QLabel(self)
         figure_label.setPixmap(pixmap)
         layout.addWidget(figure_label, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        text_label = QLabel("Qual 'Eu te Amo' é verdadeiro?", self)
+        text_label.resize(500, 100)
+        text_label.move(650, 150)
+
+        button_1 = QPushButton(self)
+        button_1.resize(300, 300)
+        button_1.move(450, 300)
+        button_1.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/amo_1.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+        button_1.clicked.connect(lambda: self.stack.setCurrentIndex(4))
+
+        button_2 = QPushButton(self)
+        button_2.resize(300, 300)
+        button_2.move(800, 300)
+        button_2.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/amo_2.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+        button_2.clicked.connect(lambda: self.stack.setCurrentIndex(4))
+
+        button_3 = QPushButton(self)
+        button_3.resize(300, 300)
+        button_3.move(450, 600)
+        button_3.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/amo_3.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+        button_3.clicked.connect(lambda: self.stack.setCurrentIndex(4))
+
+        button_4 = QPushButton(self)
+        button_4.resize(300, 300)
+        button_4.move(800, 600)
+        button_4.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/amo_4.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+        button_4.clicked.connect(lambda: self.stack.setCurrentIndex(4))
+
+        button_5 = QPushButton(self)
+        button_5.resize(100, 100)
+        button_5.move(750, 50)
+        button_5.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/amo_5.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+        button_5.clicked.connect(lambda: self.stack.setCurrentIndex(4))
+
+
+class FifthPage(QWidget):
+    """The fifth screen that loads next."""
+
+    def __init__(self, stack_widget):
+        """Initialize the fifth page and set up its UI."""
+        super().__init__()
+        self.stack = stack_widget
+        self.init_ui()
+
+    def init_ui(self):
+        """Set up the UI for the fifth page."""
+
+        self.layout = QVBoxLayout(self)
+        pixmap = QPixmap(FIGURE_MAPPING["figure6"])
+        figure_label = QLabel(self)
+        figure_label.setPixmap(pixmap)
+        self.layout.addWidget(figure_label, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        self.text_label = QLabel("Quantas vezes falamos 'Eu te amo' no whats.", self)
+        self.text_label.resize(500, 100)
+        self.text_label.move(600, 200)
+
+        self.opt_btn_1 = QPushButton("700", self)
+        self.opt_btn_1.resize(250, 50)
+        self.opt_btn_1.move(550, 400)
+        self.opt_btn_1.clicked.connect(self.middle_page)
+
+        self.opt_btn_2 = QPushButton("100", self)
+        self.opt_btn_2.resize(250, 50)
+        self.opt_btn_2.move(850, 400)
+        self.opt_btn_2.clicked.connect(self.middle_page)
+
+        self.opt_btn_3 = QPushButton("1000", self)
+        self.opt_btn_3.resize(250, 50)
+        self.opt_btn_3.move(550, 500)
+        self.opt_btn_3.clicked.connect(self.middle_page)
+
+        self.opt_btn_4 = QPushButton("360", self)
+        self.opt_btn_4.resize(250, 50)
+        self.opt_btn_4.move(850, 500)
+        self.opt_btn_4.clicked.connect(self.middle_page)
+
+    def middle_page(self):
+        """Page that will show only a label before it continue to the sixth page."""
+
+        self.opt_btn_1.deleteLater()
+        self.opt_btn_2.deleteLater()
+        self.opt_btn_3.deleteLater()
+        self.opt_btn_4.deleteLater()
+        self.text_label.setText("TODOS OS MEUS EU TE AMO SÃO VERDADEIROS!!")
+
+        QTimer.singleShot(3000, lambda: self.stack.setCurrentIndex(2))
 
 
 class MainWindow(QMainWindow):  # pylint: disable=too-few-public-methods
@@ -196,13 +312,13 @@ class MainWindow(QMainWindow):  # pylint: disable=too-few-public-methods
         self.page2 = SecondPage(self.stacked_widget)
         self.page3 = ThirdPage(self.stacked_widget)
         self.page4 = FourthPage(self.stacked_widget)
-        # self.page5 = FifthPage(self.stacked_widget)
+        self.page5 = FifthPage(self.stacked_widget)
 
         self.stacked_widget.addWidget(self.page1)
         self.stacked_widget.addWidget(self.page2)
         self.stacked_widget.addWidget(self.page3)
         self.stacked_widget.addWidget(self.page4)
-        # self.stacked_widget.addWidget(self.page5)
+        self.stacked_widget.addWidget(self.page5)
 
         self.stacked_widget.setCurrentIndex(0)
 
