@@ -1,8 +1,6 @@
 """Interface generator for the interface"""
 
-import sys
 import random
-import time
 from PySide6.QtWidgets import (
     QApplication,
     QLabel,
@@ -12,8 +10,8 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from PySide6.QtCore import QSize, QTimer, Slot, Qt
-from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtCore import QTimer, Slot, Qt
+from PySide6.QtGui import QPixmap
 
 FIGURE_MAPPING = {
     "figure1": "images/cats_1.png",
@@ -24,6 +22,8 @@ FIGURE_MAPPING = {
     "figure6": "images/cats_4.png",
     "figure7": "images/cats_5.png",
     "figure8": "images/cats_6.png",
+    "figure9": "images/teamo_1.png",
+    "figure10": "images/ss_1.png",
 }
 
 
@@ -57,7 +57,7 @@ class FirstPage(QWidget):
         button = QPushButton("Te amooooo!!", self)
         button.resize(300, 100)
         button.move(450, 250)
-        button.clicked.connect(lambda: self.stack.setCurrentIndex(6))
+        button.clicked.connect(lambda: self.stack.setCurrentIndex(1))
 
 
 class SecondPage(QWidget):
@@ -305,7 +305,6 @@ class FifthPage(QWidget):
 
     def fail_attempt(self, button_clicked):
         """Handle the case when the user fails to select an image."""
-        print(button_clicked)
         button_clicked.deleteLater()
 
 
@@ -455,14 +454,146 @@ class EighthPage(QWidget):
     def init_ui(self):
         """Set up the UI for the eighth page."""
         layout = QVBoxLayout(self)
-        pixmap = QPixmap(FIGURE_MAPPING["figure8"])
+        pixmap = QPixmap(FIGURE_MAPPING["figure9"])
         figure_label = QLabel(self)
         figure_label.setPixmap(pixmap)
         layout.addWidget(figure_label, alignment=Qt.AlignmentFlag.AlignLeft)
 
-        text_label = QLabel("Te AMO em TODOS os momentos", self)
+        text_label = QLabel("TE AMO TE AMO TE AMO TE AMO TE AMO TE AMO TE AMO", self)
         text_label.resize(1000, 100)
-        text_label.move(450, 200)
+        text_label.move(600, 100)
+
+        self.button_1 = QPushButton(self)
+        self.button_1.resize(400, 600)
+        self.button_1.move(650, 200)
+        self.button_1.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/ss_1.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+        self.button_1.clicked.connect(lambda: self.stack.setCurrentIndex(8))
+
+
+class NingthyPage(QWidget):
+    """The ninth screen that loads next."""
+
+    def __init__(self, stack_widget):
+        """Initialize the ninth page and set up its UI."""
+        super().__init__()
+        self.stack = stack_widget
+        self.init_ui()
+
+    def init_ui(self):
+        """Set up the UI for the ninth page."""
+        layout = QVBoxLayout(self)
+        pixmap = QPixmap(FIGURE_MAPPING["figure10"])
+        figure_label = QLabel(self)
+        figure_label.setPixmap(pixmap)
+        layout.addWidget(figure_label, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        text_label = QLabel("TE AMO TE AMO TE AMO TE AMO TE AMO TE AMO TE AMO", self)
+        text_label.resize(1000, 100)
+        text_label.move(500, 200)
+
+        text_label = QLabel("Qual adjetivo você gosta mais?", self)
+        text_label.resize(1000, 100)
+        text_label.move(630, 300)
+
+        opt_btn_1 = QPushButton("Amor", self)
+        opt_btn_1.resize(250, 50)
+        opt_btn_1.move(550, 400)
+        opt_btn_1.clicked.connect(lambda: self.stack.setCurrentIndex(9))
+
+        opt_btn_2 = QPushButton("Vida", self)
+        opt_btn_2.resize(250, 50)
+        opt_btn_2.move(850, 400)
+        opt_btn_2.clicked.connect(lambda: self.stack.setCurrentIndex(9))
+
+        opt_btn_3 = QPushButton("Bida", self)
+        opt_btn_3.resize(250, 50)
+        opt_btn_3.move(550, 500)
+        opt_btn_3.clicked.connect(lambda: self.stack.setCurrentIndex(9))
+
+        opt_btn_4 = QPushButton("Biluga", self)
+        opt_btn_4.resize(250, 50)
+        opt_btn_4.move(850, 500)
+        opt_btn_4.clicked.connect(lambda: self.stack.setCurrentIndex(9))
+
+        opt_btn_5 = QPushButton("Princesa", self)
+        opt_btn_5.resize(250, 50)
+        opt_btn_5.move(550, 600)
+        opt_btn_5.clicked.connect(lambda: self.stack.setCurrentIndex(9))
+
+        opt_btn_6 = QPushButton("Gata", self)
+        opt_btn_6.resize(250, 50)
+        opt_btn_6.move(850, 600)
+        opt_btn_6.clicked.connect(lambda: self.stack.setCurrentIndex(9))
+
+
+class TenthPage(QWidget):
+    """The tenth screen that loads next."""
+
+    def __init__(self, stack_widget):
+        """Initialize the tenth page and set up its UI."""
+        super().__init__()
+        self.stack = stack_widget
+        self.init_ui()
+
+    def init_ui(self):
+        """Set up the UI for the tenth page."""
+
+        self.button_1 = QPushButton(self)
+        self.button_1.resize(600, 600)
+        self.button_1.move(330, 200)
+        self.button_1.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/fim.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+
+        self.button_2 = QPushButton(self)
+        self.button_2.resize(300, 300)
+        self.button_2.move(0, 0)
+        self.button_2.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/cats_7.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+
+        self.button_3 = QPushButton(self)
+        self.button_3.resize(300, 300)
+        self.button_3.move(0, 650)
+        self.button_3.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/cats_8.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+
+        self.button_4 = QPushButton(self)
+        self.button_4.resize(300, 300)
+        self.button_4.move(900, 0)
+        self.button_4.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/cats_9.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+
+        self.button_5 = QPushButton(self)
+        self.button_5.resize(300, 300)
+        self.button_5.move(900, 650)
+        self.button_5.setStyleSheet("""
+            QPushButton {
+                border-image: url("images/cats_10.png") 0 0 0 0 stretch stretch;
+                border: none;
+            }
+        """)
+
+        QTimer.singleShot(20000, lambda: self.stack.setCurrentIndex(0))
 
 
 class MainWindow(QMainWindow):  # pylint: disable=too-few-public-methods
@@ -486,6 +617,8 @@ class MainWindow(QMainWindow):  # pylint: disable=too-few-public-methods
         self.page6 = SixthPage(self.stacked_widget)
         self.page7 = SeventhPage(self.stacked_widget)
         self.page8 = EighthPage(self.stacked_widget)
+        self.page9 = NingthyPage(self.stacked_widget)
+        self.page10 = TenthPage(self.stacked_widget)
 
         self.stacked_widget.addWidget(self.page1)
         self.stacked_widget.addWidget(self.page2)
@@ -495,6 +628,8 @@ class MainWindow(QMainWindow):  # pylint: disable=too-few-public-methods
         self.stacked_widget.addWidget(self.page6)
         self.stacked_widget.addWidget(self.page7)
         self.stacked_widget.addWidget(self.page8)
+        self.stacked_widget.addWidget(self.page9)
+        self.stacked_widget.addWidget(self.page10)
 
         self.stacked_widget.setCurrentIndex(0)
 
